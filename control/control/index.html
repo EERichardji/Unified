@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./js/webcc.min.js"></script>
+    <script src="./js/three-colors-light.js"></script>
+    <title>工业三色柱灯控件</title>
+  </head>
+  <body>
+    <div id="three-colors-light"></div>
+    <script>
+      const threeColorLight = new ThreeColorsLight(document.querySelector('#three-colors-light'))
+      let redStateNum = 0
+      let greenStateNum = 0
+      let yellowStateNum = 0
+
+      function initialize() {
+        threeColorLight.allLightsOff()
+      }
+
+      function setProperty(data) {
+        const handlers = {
+          Red: handleRed,
+          Green: handleGreen,
+          Yellow: handleYellow
+        }
+        if (handlers[data.key]) {
+          handlers[data.key](data.value)
+        }
+      }
+
+      function handleRed(value) {
+        if (redStateNum === value) return
+
+        switch (value) {
+          case 0:
+            threeColorLight.redOff()
+            break
+          case 1:
+            threeColorLight.redOn()
+            break
+          case 2:
+            threeColorLight.redOn(true)
+            break
+        }
+
+        redStateNum = value
+        WebCC.Events.fire('RedChanged', value)
+      }
+
+      function handleGreen(value) {
+        if (greenStateNum === value) return
+
+        switch (value) {
+          case 0:
+            threeColorLight.greenOff()
+            break
+          case 1:
+            threeColorLight.greenOn()
+            break
+          case 2:
+            threeColorLight.greenOn(true)
+            break
+        }
+
+        greenStateNum = value
+        WebCC.Events.fire('GreenChanged', value)
+      }
+
+      function handleYellow(value) {
+        if (yellowStateNum === value) return
+
+        switch (value) {
+          case 0:
+            threeColorLight.yellowOff()
+            break
+          case 1:
+            threeColorLight.yellowOn()
+            break
+          case 2:
+            threeColorLight.yellowOn(true)
+            break
+        }
+        yellowStateNum = value
+        WebCC.Events.fire('YellowChanged', value)
+      }
+
+      WebCC.start(
+        function (result) {
+          if (result) {
+            console.log('connected successfully')
+            initialize() //自定义初始化
+            //关联属性
+            setProperty({ key: 'Red', value: WebCC.Properties.Red })
+            setProperty({ key: 'Green', value: WebCC.Properties.Green })
+            setProperty({ key: 'Yellow', value: WebCC.Properties.Yellow })
+            // 订阅属性变化
+            WebCC.onPropertyChanged.subscribe(setProperty)
+          } else {
+            console.log('connection failed')
+          }
+        },
+        {
+          methods: {
+            LightOnOff: function (colorStr, stateNum) {
+              setProperty({ key: colorStr, value: stateNum })
+            }
+          },
+          events: ['RedChanged', 'GreenChanged', 'YellowChanged'],
+          properties: {
+            Red: 0,
+            Green: 0,
+            Yellow: 0
+          }
+        },
+        [], // 占位符，用于包含其他 Unified 依赖项
+        10000 //通讯超时
+      )
+    </script>
+  </body>
+</html>

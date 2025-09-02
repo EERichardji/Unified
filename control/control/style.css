@@ -1,0 +1,224 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f0f0;
+  padding: 40px;
+  margin: 0;
+}
+
+.container {
+  max-width: 320px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* 柱灯容器 */
+.light-assembly {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 顶部安装座 */
+.top-mount {
+  width: 100px;
+  height: 15px;
+  background: linear-gradient(to bottom, #888, #666);
+  border-radius: 3px;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+/* 柱灯主体框架 */
+.light-pillar {
+  width: 80px;
+  background-color: #333;
+  border: 1px solid #222;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* 灯室通用样式 */
+.light-chamber {
+  width: 100%;
+  height: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 灯室分隔线 */
+.light-chamber:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #222, #444, #222);
+}
+
+/* 灯罩样式 */
+.light-shade {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  background-color: #444;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+/* 灯罩内反光效果 */
+.light-shade::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
+  border-radius: 50% 50% 0 0;
+}
+
+/* 灯珠发光效果 */
+.light-glow {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  transition: all 0.4s ease;
+  opacity: 0.2;
+}
+
+/* 底部连接结构 */
+.bottom-connector {
+  width: 20px;
+  height: 30px;
+  background: linear-gradient(to bottom, #555, #333);
+  border: 1px solid #222;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* 连杆细节 */
+.bottom-connector::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: -5px;
+  width: 30px;
+  height: 4px;
+  background: linear-gradient(to right, #444, #666, #444);
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* 底座样式 */
+.bottom-base {
+  width: 110px;
+  height: 20px;
+  background: linear-gradient(to bottom, #555, #333);
+  border-radius: 5px 5px 10px 10px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* 底座固定螺丝 */
+.bottom-base::before,
+.bottom-base::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: #222;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.bottom-base::before {
+  left: 15px;
+}
+.bottom-base::after {
+  right: 15px;
+}
+
+/* 状态标签 */
+.status-display {
+  margin-top: 25px;
+  padding: 8px 15px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #10b981;
+  text-align: center;
+  min-width: 180px;
+}
+
+/* 灯颜色定义 */
+.color-green {
+  background-color: #10b981;
+  box-shadow: 0 0 20px #10b981, inset 0 0 10px rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+.color-yellow {
+  background-color: #f59e0b;
+  box-shadow: 0 0 20px #f59e0b, inset 0 0 10px rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+.color-red {
+  background-color: #ef4444;
+  box-shadow: 0 0 20px #ef4444, inset 0 0 10px rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+.color-off {
+  background-color: #444;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+  opacity: 0.2;
+}
+
+/* 动画效果 */
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes blink-alert {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-pulse {
+  animation: pulse-soft 2s infinite ease-in-out;
+}
+
+.animate-blink {
+  animation: blink-alert 0.8s infinite ease-in-out;
+}

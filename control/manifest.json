@@ -1,0 +1,74 @@
+{
+  "mver": "1.0.0",
+  "control": {
+    "identity": {
+      "name": "ThreeColorsLight",
+      "version": "1.0.0",
+      "displayname": "三色灯",
+      "icon": "./assets/logo.ico",
+      "type": "guid://E87B6EDB-0CF1-4A72-81EE-7486C95A4AE0",
+      "start": "./control/index.html"
+    },
+    "metadata": {
+      "author": "Richard",
+      "keywords": ["ThreeColorsLight", "Control"]
+    },
+    "contracts": {
+      "api": {
+        "methods": {
+          "LightOnOff": {
+            "description": "Let the light on/off/blink -- 0/1/2.",
+            "parameters": {
+              "colorStr": {
+                "type": "string"
+              },
+              "stateNum": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "events": {
+          "RedChanged": {
+            "description": "",
+            "arguments": {
+              "stateNum": {
+                "type": "number"
+              }
+            }
+          },
+          "GreenChanged": {
+            "description": "",
+            "arguments": {
+              "stateNum": {
+                "type": "number"
+              }
+            }
+          },
+          "YellowChanged": {
+            "description": "",
+            "arguments": {
+              "stateNum": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "properties": {
+          "Red": {
+            "type": "number",
+            "default": 0
+          },
+          "Yellow": {
+            "type": "number",
+            "default": 0
+          },
+          "Green": {
+            "type": "number",
+            "default": 0
+          }
+        }
+      }
+    }
+  }
+}
